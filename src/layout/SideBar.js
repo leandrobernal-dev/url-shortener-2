@@ -106,7 +106,7 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                                         className={`${
                                             isSideBarOpen
                                                 ? ""
-                                                : "whitespace-nowrap rounded-sm p-1 md:absolute md:left-full md:ml-4 md:hidden md:bg-slate-300 md:text-black md:shadow-md md:group-hover:block"
+                                                : "whitespace-nowrap rounded-sm p-1 sm:absolute sm:left-full sm:hidden sm:bg-zinc-400 sm:text-black sm:shadow-md sm:group-hover:block"
                                         }  origin-left`}
                                     >
                                         {link.name}
