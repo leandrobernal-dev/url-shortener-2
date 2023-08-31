@@ -8,7 +8,9 @@ import { Close, Menu } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 
 export default function AppLayout({ children }) {
-    const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+    const [isSideBarOpen, setIsSideBarOpen] = useState(
+        window.innerWidth > 768 ? true : false
+    );
 
     const [isNewUrlModalFormOpen, setIsNewUrlModalFormOpen] = useState(false);
 
