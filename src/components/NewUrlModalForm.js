@@ -22,11 +22,11 @@ export default function NewUrlModalForm({ open, setOpen }) {
                             setOpen();
                     }}
                     aria-label="modal-overlay"
-                    className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/70 shadow-lg backdrop-blur-sm"
+                    className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center dark:bg-black/70 shadow-lg backdrop-blur-sm"
                 >
                     <form
                         onSubmit={handleNewUrlSubmit}
-                        className="w-11/12 max-w-lg rounded bg-primary p-4 dark:text-white"
+                        className="w-11/12 max-w-lg rounded dark:bg-zinc-800 p-4 dark:text-white"
                     >
                         <div className="flex w-full items-center justify-between">
                             <h1 className="py-3 text-2xl">Create New</h1>
