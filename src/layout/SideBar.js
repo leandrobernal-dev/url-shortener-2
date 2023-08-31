@@ -6,7 +6,7 @@ export default function SideBar({ SideBarToggle }) {
 
     return (
         <aside
-            className={`fixed sm:top-1 sm:block sm:left-1 sm:bottom-1 w-14 md:w-56 dark:bg-black dark:sm:bg-zinc-800 rounded-sm ${
+            className={`fixed z-50 sm:top-1 sm:block sm:left-1 sm:bottom-1 w-14 md:w-56 dark:bg-black dark:sm:bg-zinc-800 rounded-sm ${
                 isSideBarOpen
                     ? "top-0 bottom-0 left-0 w-full rounded-none block"
                     : "hidden"
