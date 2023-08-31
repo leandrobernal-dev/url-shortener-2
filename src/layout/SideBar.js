@@ -1,9 +1,57 @@
 import { UserDataContext } from "@/context/ContextProvider";
-import { Add } from "@mui/icons-material";
-import { useContext } from "react";
+import { Add, Apps, LinkRounded, QrCode } from "@mui/icons-material";
+import { useContext, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
-    const { isSideBarOpen } = useContext(UserDataContext);
+    const { isSideBarOpen, setIsSideBarOpen } = useContext(UserDataContext);
+
+    const pathname = usePathname();
+    const router = useRouter();
+    const navLinks = [
+        { name: "Dashboard", href: "/app", icon: <Apps /> },
+        {
+            name: "Links",
+            href: "/app/links",
+            icon: <LinkRounded />,
+        },
+        {
+            name: "QR Codes",
+            href: "/app/qrcodes",
+            icon: <QrCode />,
+        },
+    ];
+    const currentPath = () => {
+        function calculateJaccardSimilarity(arr1, arr2) {
+            const set1 = new Set(arr1);
+            const set2 = new Set(arr2);
+            const intersectionSize = new Set(
+                [...set1].filter((item) => set2.has(item))
+            ).size;
+            const unionSize = new Set([...set1, ...set2]).size;
+            return intersectionSize / unionSize;
+        }
+
+        const currentPath = pathname.split("/").filter(Boolean);
+        currentPath.unshift("/");
+        const paths = navLinks.map((link) => {
+            const targetPath = link.href.split("/").filter(Boolean);
+            targetPath.unshift("/");
+            return targetPath;
+        });
+
+        const active = paths
+            .map((href, index) => ({
+                index: index,
+                similarity: calculateJaccardSimilarity(currentPath, href),
+            }))
+            .reduce((prev, current) =>
+                current.similarity > prev.similarity ? current : prev
+            ).index;
+        return navLinks[active].href;
+    };
+
+    const [activeNav, setActiveNav] = useState(currentPath);
 
     return (
         <aside
@@ -17,15 +65,64 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                 {SideBarToggle}
             </div>
 
-            <div>
-                <button
-                    onClick={() =>
-                        openNewUrlModalForm((prevState) => !prevState)
-                    }
-                    className="w-full rounded-sm dark:bg-zinc-600 p-2 dark:hover:bg-zinc-500"
-                >
-                    <Add /> {isSideBarOpen ? "Create new" : ""}
-                </button>
+            <div className="flex flex-col">
+                <div>
+                    <button
+                        onClick={() =>
+                            openNewUrlModalForm((prevState) => !prevState)
+                        }
+                        className="w-full rounded-sm dark:bg-zinc-600 p-2 dark:hover:bg-zinc-500"
+                    >
+                        <Add /> {isSideBarOpen ? "Create new" : ""}
+                    </button>
+
+                    <hr className="my-2 dark:text-slate-500" />
+                </div>
+                <ul className="flex flex-col gap-2">
+                    {navLinks.map((link) => {
+                        return (
+                            <li
+                                key={link.name + link.href}
+                                className={`group relative flex`}
+                            >
+                                <button
+                                    className={`${
+                                        activeNav === link.href
+                                            ? "bg-primary text-white"
+                                            : ""
+                                    } relative z-10 flex h-full  w-full items-center gap-1 rounded-sm p-2 hover:bg-primary/70`}
+                                    onClick={() => {
+                                        setIsSideBarOpen(
+                                            window.innerWidth > 768
+                                                ? true
+                                                : false
+                                        );
+                                        router.push(link.href);
+                                        setActiveNav(() => link.href);
+                                    }}
+                                >
+                                    {link.icon}
+                                    <span
+                                        className={`${
+                                            isSideBarOpen
+                                                ? ""
+                                                : "whitespace-nowrap rounded-sm p-1 md:absolute md:left-full md:ml-4 md:hidden md:bg-slate-300 md:text-black md:shadow-md md:group-hover:block"
+                                        }  origin-left`}
+                                    >
+                                        {link.name}
+                                    </span>
+                                    <span
+                                        className={`absolute bottom-0 left-0 top-0 w-1 bg-slate-700  ${
+                                            activeNav === link.href
+                                                ? ""
+                                                : "hidden"
+                                        }`}
+                                    ></span>
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
         </aside>
     );
