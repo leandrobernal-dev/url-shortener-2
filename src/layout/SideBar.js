@@ -88,6 +88,10 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                                 <button
                                     className={`${
                                         activeNav === link.href
+                                            ? "border-b-2 shadow-sm border-l"
+                                            : ""
+                                    } ${
+                                        activeNav === link.href
                                             ? "bg-primary text-white"
                                             : ""
                                     } relative z-10 flex h-full  w-full items-center gap-1 rounded-sm p-2 hover:bg-primary/70`}
@@ -111,13 +115,13 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                                     >
                                         {link.name}
                                     </span>
-                                    <span
+                                    {/* <span
                                         className={`absolute bottom-0 left-0 top-0 w-1 bg-slate-700  ${
                                             activeNav === link.href
                                                 ? ""
                                                 : "hidden"
                                         }`}
-                                    ></span>
+                                    ></span> */}
                                 </button>
                             </li>
                         );
