@@ -13,7 +13,11 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
         {
             name: "Links",
             href: "/app/links",
-            icon: <LinkRounded />,
+            icon: (
+                <span className="rotate-45">
+                    <LinkRounded />
+                </span>
+            ),
         },
         {
             name: "QR Codes",
@@ -94,7 +98,7 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                                         activeNav === link.href
                                             ? "bg-primary text-white"
                                             : ""
-                                    } relative z-10 flex h-full  w-full items-center gap-1 rounded-sm p-2 hover:bg-primary/70`}
+                                    } relative z-10 flex h-full  w-full items-center gap-1 rounded-md p-2 hover:bg-primary/70`}
                                     onClick={() => {
                                         setIsSideBarOpen(
                                             window.innerWidth > 768
