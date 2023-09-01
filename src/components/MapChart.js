@@ -5,6 +5,8 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 
 function MapChart({ data, id }) {
+    const noDataColor = "000";
+    const withDataColor = "#fff";
     useEffect(() => {
         // Apply the animated theme
         am4core.useTheme(am4themes_animated);
@@ -57,9 +59,9 @@ function MapChart({ data, id }) {
                 const { dataItem } = target;
                 if (dataItem.dataContext) {
                     if (dataItem.dataContext.count) {
-                        return am4core.color("#005F74"); //#414141 Darker color for regions with views
+                        return am4core.color(withDataColor); //#414141 Darker color for regions with views
                     } else {
-                        return am4core.color("#20A6B9"); //#CFCFCF Light gray color for regions with no views
+                        return am4core.color(noDataColor); //#CFCFCF Light gray color for regions with no views
                     }
                 }
                 return fill;
