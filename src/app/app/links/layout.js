@@ -10,7 +10,7 @@ export default function LinksLayout({ children }) {
     const data = userData.urls;
 
     const segment = useSelectedLayoutSegment();
-    const { activeLink, setActiveLink } = useContext(UserDataContext);
+    const { setActiveLink } = useContext(UserDataContext);
 
     // inital get urls
     useEffect(() => {
