@@ -77,7 +77,7 @@ function MapChart({ data, id }) {
     return (
         <div
             id={id}
-            className="rounded-sm dark:bg-zinc-950"
+            className="rounded-sm dark:bg-zinc-900"
             style={{
                 width: "100%",
                 height: "500px",
