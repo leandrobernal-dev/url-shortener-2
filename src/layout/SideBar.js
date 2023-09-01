@@ -80,9 +80,9 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                         <Add /> {isSideBarOpen ? "Create new" : ""}
                     </button>
 
-                    <hr className="my-2 dark:text-slate-500" />
+                    <hr className="my-6 dark:text-slate-500" />
                 </div>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col gap-4">
                     {navLinks.map((link) => {
                         return (
                             <li
