@@ -6,14 +6,10 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 export default function LinksLayout({ children }) {
-    const { userData, setActiveLink } = useContext(UserDataContext);
+    const { userData } = useContext(UserDataContext);
     const data = userData.urls;
 
     const segment = useSelectedLayoutSegment();
-
-    useEffect(() => {
-        if (segment) setActiveLink(segment);
-    }, []);
 
     return (
         <div className="flex gap-1 h-full">
