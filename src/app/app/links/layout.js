@@ -36,7 +36,11 @@ export default function LinksLayout({ children }) {
                 })}
             </div>
 
-            <div className="p-1 rounded-sm hidden sm:flex items-center justify-center flex-1">
+            <div
+                className={`p-1 rounded-sm  sm:flex  justify-center flex-1 ${
+                    segment ? "items-start" : "hidden items-center"
+                }`}
+            >
                 {children}
             </div>
         </div>
