@@ -21,7 +21,7 @@ export default function LinksLayout({ children }) {
             <LinkSideBar data={data} segment={segment} />
 
             <div
-                className={`p-1 rounded-sm  sm:flex  justify-center flex-1 ${
+                className={`rounded-sm  sm:flex  justify-center flex-1 ${
                     segment ? "items-start" : "hidden items-center"
                 }`}
             >
