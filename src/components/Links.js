@@ -1,4 +1,5 @@
 import { Visibility } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 export default function Links({
     title,
@@ -7,12 +8,14 @@ export default function Links({
     shortUrl,
     longUrl,
     active,
+    id,
 }) {
+    const router = useRouter();
     return (
         <button
-            className={`w-full flex flex-col rounded-md ${
-                active ? "border-l p-2 shadow-md border-b-2" : ""
-            }`}
+            onClick={() => router.push(`/app/links/${id}`)}
+            className={`w-full flex flex-col rounded-md border-l
+            border-b-2 p-2 shadow-md ${active ? "" : "border-transparent"}`}
         >
             <span className="text-xs dark:text-zinc-400">{date}</span>
             <span className="flex justify-between w-full">
