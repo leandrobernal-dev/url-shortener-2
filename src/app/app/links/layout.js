@@ -12,7 +12,6 @@ export default function LinksLayout({ children }) {
     const segment = useSelectedLayoutSegment();
     const { setActiveLink } = useContext(UserDataContext);
 
-    // inital get urls
     useEffect(() => {
         if (segment) setActiveLink(segment);
     }, []);
