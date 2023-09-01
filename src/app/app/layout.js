@@ -9,29 +9,33 @@ import { useEffect, useState } from "react";
 
 export default function AppLayout({ children }) {
     const [userData, setUserData] = useState({
-        urls: [
-            {
-                _id: "abcd",
+        urls: {
+            abcd: {
                 title: "YouTube",
                 date: "Jun 11",
                 shortUrl: "http://youtube.com/",
                 longUrl: "http://localhost:3001/aTva9",
                 views: "34",
                 active: true,
+                mapChartData: [
+                    { id: "PH", count: 21 },
+                    { id: "JP", count: 451 },
+                ],
             },
-            {
-                _id: "123",
+            123: {
                 title: "YouTube",
                 date: "Jun 11",
                 shortUrl: "http://youtube.com/",
                 longUrl: "http://localhost:3001/aTva9",
                 views: "34",
                 active: false,
+                mapChartData: [
+                    { id: "PH", count: 21 },
+                    { id: "US", count: 451 },
+                ],
             },
-        ],
+        },
     });
-
-    const [activeLink, setActiveLink] = useState("");
 
     const [isSideBarOpen, setIsSideBarOpen] = useState(
         window.innerWidth > 768 ? true : false
@@ -65,8 +69,6 @@ export default function AppLayout({ children }) {
                 isSideBarOpen,
                 setIsSideBarOpen,
                 userData,
-                activeLink,
-                setActiveLink,
             }}
         >
             <main className="">
