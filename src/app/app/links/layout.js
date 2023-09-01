@@ -6,11 +6,10 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 export default function LinksLayout({ children }) {
-    const { userData } = useContext(UserDataContext);
+    const { userData, setActiveLink } = useContext(UserDataContext);
     const data = userData.urls;
 
     const segment = useSelectedLayoutSegment();
-    const { setActiveLink } = useContext(UserDataContext);
 
     useEffect(() => {
         if (segment) setActiveLink(segment);
