@@ -15,7 +15,7 @@ export default function AppLayout({ children }) {
                 date: "Jun 11",
                 shortUrl: "http://youtube.com/",
                 longUrl: "http://localhost:3001/aTva9",
-                views: "34",
+                clicks: "34",
                 active: true,
                 mapChartData: [
                     { id: "PH", count: 21 },
@@ -27,7 +27,7 @@ export default function AppLayout({ children }) {
                 date: "Jun 11",
                 shortUrl: "http://youtube.com/",
                 longUrl: "http://localhost:3001/aTva9",
-                views: "34",
+                clicks: "34",
                 active: false,
                 mapChartData: [
                     { id: "PH", count: 21 },

@@ -12,7 +12,7 @@ export default function LinkSideBar({ data, segment }) {
                         longUrl={data[urlId].longUrl}
                         shortUrl={data[urlId].shortUrl}
                         title={data[urlId].title}
-                        views={data[urlId].views}
+                        clicks={data[urlId].clicks}
                         active={segment === urlId}
                     />
                 );

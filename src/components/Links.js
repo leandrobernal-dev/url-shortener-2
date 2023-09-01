@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 export default function Links({
     title,
     date,
-    views,
+    clicks,
     shortUrl,
     longUrl,
     active,
@@ -23,7 +23,7 @@ export default function Links({
             <span className="flex justify-between w-full">
                 <span className="text-xl">{title}</span>
                 <span className="flex items-center gap-1 text-xs">
-                    {views} <Visibility sx={{ fontSize: "14px" }} />
+                    {clicks} <Visibility sx={{ fontSize: "14px" }} />
                 </span>
             </span>
             <span className="flex flex-col items-start text-xs ">
