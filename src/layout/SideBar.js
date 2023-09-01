@@ -93,8 +93,8 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                                     className={`${
                                         activeNav === link.href
                                             ? "bg-primary text-white "
-                                            : "border-transparent"
-                                    } relative z-10 flex h-full border-b-2 shadow-sm border-l w-full items-center gap-1 rounded-md p-2 hover:bg-primary/70`}
+                                            : "border-transparent hover:border-white/50"
+                                    } relative z-10 flex h-full border-b-2 shadow-sm border-l w-full items-center gap-1 rounded-md p-2 `}
                                     onClick={() => {
                                         setIsSideBarOpen(
                                             window.innerWidth > 768

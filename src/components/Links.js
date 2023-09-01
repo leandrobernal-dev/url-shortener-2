@@ -15,7 +15,9 @@ export default function Links({
         <button
             onClick={() => router.push(`/app/links/${id}`)}
             className={`w-full flex flex-col rounded-md border-l
-            border-b-2 p-2 shadow-md ${active ? "" : "border-transparent"}`}
+            border-b-2 p-2 shadow-md ${
+                active ? "" : "border-transparent hover:border-white/50"
+            }`}
         >
             <span className="text-xs dark:text-zinc-400">{date}</span>
             <span className="flex justify-between w-full">
