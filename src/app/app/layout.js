@@ -8,6 +8,31 @@ import { Close, Menu } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 
 export default function AppLayout({ children }) {
+    const [userData, setUserData] = useState({
+        urls: [
+            {
+                _id: "abcd",
+                title: "YouTube",
+                date: "Jun 11",
+                shortUrl: "http://youtube.com/",
+                longUrl: "http://localhost:3001/aTva9",
+                views: "34",
+                active: true,
+            },
+            {
+                _id: "123",
+                title: "YouTube",
+                date: "Jun 11",
+                shortUrl: "http://youtube.com/",
+                longUrl: "http://localhost:3001/aTva9",
+                views: "34",
+                active: false,
+            },
+        ],
+    });
+
+    const [activeLink, setActiveLink] = useState("");
+
     const [isSideBarOpen, setIsSideBarOpen] = useState(
         window.innerWidth > 768 ? true : false
     );
@@ -35,7 +60,15 @@ export default function AppLayout({ children }) {
     );
 
     return (
-        <UserDataContextProvider value={{ isSideBarOpen, setIsSideBarOpen }}>
+        <UserDataContextProvider
+            value={{
+                isSideBarOpen,
+                setIsSideBarOpen,
+                userData,
+                activeLink,
+                setActiveLink,
+            }}
+        >
             <main className="">
                 <NavBar SideBarToggle={SideBarToggle} />
                 <SideBar
