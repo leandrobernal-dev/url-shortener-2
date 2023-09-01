@@ -3,17 +3,17 @@ import Links from "@/components/Links";
 export default function LinkSideBar({ data, segment }) {
     return (
         <div className="dark:bg-zinc-800 flex flex-col gap-4 p-1 rounded-sm h-full w-full sm:w-72 overflow-y-scroll small-scrollbar">
-            {data.map((url) => {
+            {Object.keys(data).map((urlId) => {
                 return (
                     <Links
-                        id={url._id}
-                        key={url._id}
-                        date={url.date}
-                        longUrl={url.longUrl}
-                        shortUrl={url.shortUrl}
-                        title={url.title}
-                        views={url.views}
-                        active={segment === url._id}
+                        id={urlId}
+                        key={urlId}
+                        date={data[urlId].date}
+                        longUrl={data[urlId].longUrl}
+                        shortUrl={data[urlId].shortUrl}
+                        title={data[urlId].title}
+                        views={data[urlId].views}
+                        active={segment === urlId}
                     />
                 );
             })}

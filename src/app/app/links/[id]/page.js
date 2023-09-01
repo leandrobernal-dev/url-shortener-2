@@ -1,11 +1,15 @@
 "use client";
 
 import MapChart from "@/components/MapChart";
+import { UserDataContext } from "@/context/ContextProvider";
 import { Close, Info } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 export default function LinksDetails({ params }) {
     const router = useRouter();
+
+    const { userData } = useContext(UserDataContext);
     const urlId = params.id;
     return (
         <div className="fixed top-1 right-1 left-1 small-scrollbar bottom-1 w-full overflow-y-scroll h-full dark:bg-black sm:static pt-[60px] sm:pt-0">
@@ -19,13 +23,7 @@ export default function LinksDetails({ params }) {
                     </button>
                 </div>
             </nav>
-            <MapChart
-                data={[
-                    { id: "PH", count: 21 },
-                    { id: "JP", count: 451 },
-                ]}
-                id={"noen"}
-            />
+            <MapChart data={userData.urls[urlId].mapChartData} id={"noen"} />
         </div>
     );
 }
