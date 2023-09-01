@@ -92,9 +92,9 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
                                 <button
                                     className={`${
                                         activeNav === link.href
-                                            ? "bg-primary text-white border-b-2 shadow-sm border-l"
-                                            : ""
-                                    } relative z-10 flex h-full  w-full items-center gap-1 rounded-md p-2 hover:bg-primary/70`}
+                                            ? "bg-primary text-white "
+                                            : "border-transparent"
+                                    } relative z-10 flex h-full border-b-2 shadow-sm border-l w-full items-center gap-1 rounded-md p-2 hover:bg-primary/70`}
                                     onClick={() => {
                                         setIsSideBarOpen(
                                             window.innerWidth > 768
