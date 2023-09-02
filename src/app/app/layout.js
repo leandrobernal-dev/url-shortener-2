@@ -12,7 +12,7 @@ export default function AppLayout({ children }) {
         urls: {
             abcd: {
                 title: "YouTube",
-                date: "Jun 11",
+                createdAt: "Jun 11",
                 shortUrl: "http://youtube.com/",
                 longUrl: "http://localhost:3001/aTva9",
                 clicks: "34",
@@ -23,10 +23,10 @@ export default function AppLayout({ children }) {
                 ],
             },
             123: {
-                title: "YouTube",
-                date: "Jun 11",
-                shortUrl: "http://youtube.com/",
-                longUrl: "http://localhost:3001/aTva9",
+                title: "Instagram",
+                createdAt: "Jun 11",
+                shortUrl: "http://instagram.com/",
+                longUrl: "http://localhost:3001/bT_2a9",
                 clicks: "34",
                 active: false,
                 mapChartData: [

@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 export default function Links({
     title,
-    date,
+    createdAt,
     clicks,
     shortUrl,
     longUrl,
@@ -19,7 +19,7 @@ export default function Links({
                 active ? "" : "border-transparent hover:border-white/50"
             }`}
         >
-            <span className="text-xs dark:text-zinc-400">{date}</span>
+            <span className="text-xs dark:text-zinc-400">{createdAt}</span>
             <span className="flex justify-between w-full">
                 <span className="text-xl">{title}</span>
                 <span className="flex items-center gap-1 text-xs">

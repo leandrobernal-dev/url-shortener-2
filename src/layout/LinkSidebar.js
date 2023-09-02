@@ -8,7 +8,7 @@ export default function LinkSideBar({ data, segment }) {
                     <Links
                         id={urlId}
                         key={urlId}
-                        date={data[urlId].date}
+                        createdAt={data[urlId].createdAt}
                         longUrl={data[urlId].longUrl}
                         shortUrl={data[urlId].shortUrl}
                         title={data[urlId].title}
