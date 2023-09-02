@@ -6,7 +6,7 @@ import * as am4maps from "@amcharts/amcharts4/maps";
 
 function MapChart({ data, id }) {
     const noDataColor = "000";
-    const withDataColor = "#fff";
+    const withDataColor = "#38bdf8";
     useEffect(() => {
         // Apply the animated theme
         am4core.useTheme(am4themes_animated);
