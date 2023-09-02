@@ -72,13 +72,13 @@ export default function AppLayout({ children }) {
             }}
         >
             <main className="">
-                {/* <NavBar SideBarToggle={SideBarToggle} /> */}
+                <NavBar SideBarToggle={SideBarToggle} />
                 <SideBar
                     SideBarToggle={SideBarToggle}
                     openNewUrlModalForm={setIsNewUrlModalFormOpen}
                 />
 
-                <div className="fixed top-1 md:left-[232px] sm:left-16 rounded-sm bottom-1 left-1 right-1">
+                <div className="fixed sm:top-1 top-[64px] md:left-[232px] sm:left-16 rounded-sm bottom-1 left-1 right-1">
                     {children}
                 </div>
             </main>
