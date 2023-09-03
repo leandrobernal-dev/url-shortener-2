@@ -22,8 +22,11 @@ export default function LinksDetails({ params }) {
             colors: ["#ff6384", "#36a2eb", "#ffce56"],
         };
         return (
-            <div className="dark:bg-zinc-900 rounded-sm  aspect-square p-2 relative">
-                <DoughnutChart key={data.labels} data={data} />
+            <div
+                key={data.labels}
+                className="dark:bg-zinc-900 rounded-sm  aspect-square p-2 relative"
+            >
+                <DoughnutChart data={data} />
             </div>
         );
     });
