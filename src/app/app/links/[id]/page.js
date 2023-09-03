@@ -31,7 +31,7 @@ export default function LinksDetails({ params }) {
         );
     });
     return (
-        <div className="fixed top-1 right-1 left-1 small-scrollbar bottom-1 w-full overflow-y-scroll h-full dark:bg-black sm:static pt-[60px] sm:pt-0">
+        <div className="fixed top-1 right-1 left-1 w-full bottom-1  h-full dark:bg-black sm:static pt-[60px] sm:pt-0">
             <nav className="fixed flex z-50 items-center top-1 h-14 left-1 right-1 dark:bg-zinc-800 sm:hidden">
                 <div className="w-full flex justify-between p-2">
                     <span className="flex items-center gap-1">
@@ -43,7 +43,7 @@ export default function LinksDetails({ params }) {
                 </div>
             </nav>
 
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 overflow-y-scroll h-full small-scrollbar pr-1 w-full">
                 <div className="w-full py-2 px-4 dark:bg-zinc-900 rounded-sm">
                     <div className="flex justify-between">
                         <div className="flex flex-col gap-2">
