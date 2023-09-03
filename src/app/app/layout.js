@@ -18,8 +18,44 @@ export default function AppLayout({ children }) {
                 clicks: "34",
                 active: true,
                 mapChartData: [
-                    { id: "PH", count: 21 },
+                    { id: "US", count: 21 },
                     { id: "JP", count: 451 },
+                ],
+                statistics: [
+                    {
+                        title: "Operating System",
+                        data: [
+                            { id: "Windows", count: 2 },
+                            { id: "MacOS", count: 2 },
+                            { id: "Iphone", count: 2 },
+                            { id: "Android", count: 2 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
+                    {
+                        title: "Device",
+                        data: [
+                            { id: "Desktop", count: 2 },
+                            { id: "Mobile", count: 2 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
+                    {
+                        title: "Location",
+                        data: [
+                            { id: "US", count: 21 },
+                            { id: "JP", count: 21 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
+                    {
+                        title: "Referrer",
+                        data: [
+                            { id: "YouTube", count: 21 },
+                            { id: "Facebook", count: 21 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
                 ],
             },
             123: {
@@ -30,8 +66,44 @@ export default function AppLayout({ children }) {
                 clicks: "34",
                 active: false,
                 mapChartData: [
-                    { id: "PH", count: 21 },
-                    { id: "US", count: 451 },
+                    { id: "US", count: 21 },
+                    { id: "JP", count: 451 },
+                ],
+                statistics: [
+                    {
+                        title: "Operating System",
+                        data: [
+                            { id: "Windows", count: 2 },
+                            { id: "MacOS", count: 2 },
+                            { id: "Iphone", count: 2 },
+                            { id: "Android", count: 2 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
+                    {
+                        title: "Device",
+                        data: [
+                            { id: "Desktop", count: 2 },
+                            { id: "Mobile", count: 2 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
+                    {
+                        title: "Location",
+                        data: [
+                            { id: "US", count: 21 },
+                            { id: "JP", count: 21 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
+                    {
+                        title: "Referrer",
+                        data: [
+                            { id: "YouTube", count: 21 },
+                            { id: "Facebook", count: 21 },
+                            { id: "Unknown", count: 2 },
+                        ],
+                    },
                 ],
             },
         },
@@ -43,13 +115,13 @@ export default function AppLayout({ children }) {
 
     const [isNewUrlModalFormOpen, setIsNewUrlModalFormOpen] = useState(false);
 
+    // window resize handler
     useEffect(() => {
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-
     function handleResize() {
         setIsSideBarOpen(() => (window.innerWidth > 768 ? true : false));
     }
