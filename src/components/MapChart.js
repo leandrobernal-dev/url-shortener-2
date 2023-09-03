@@ -80,7 +80,7 @@ function MapChart({ data, id }) {
             className="rounded-sm dark:bg-zinc-900"
             style={{
                 width: "100%",
-                height: "500px",
+                minHeight: "500px",
             }}
         />
     );
