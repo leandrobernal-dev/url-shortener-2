@@ -1,5 +1,6 @@
 "use client";
 
+import DoughnutChart from "@/components/DoughnutChart";
 import MapChart from "@/components/MapChart";
 import { UserDataContext } from "@/context/ContextProvider";
 import { CalendarMonth, Close, Delete, Edit, Info } from "@mui/icons-material";
@@ -12,6 +13,13 @@ export default function LinksDetails({ params }) {
     const { userData } = useContext(UserDataContext);
     const urlId = params.id;
     const urlData = userData.urls[urlId];
+
+    const data = {
+        title: "Location",
+        labels: ["PH", "US"],
+        values: [21, 34],
+        colors: ["#ff6384", "#36a2eb", "#ffce56"],
+    };
     return (
         <div className="fixed top-1 right-1 left-1 small-scrollbar bottom-1 w-full overflow-y-scroll h-full dark:bg-black sm:static pt-[60px] sm:pt-0">
             <nav className="fixed flex items-center top-1 h-14 left-1 right-1 dark:bg-zinc-800 sm:hidden">
@@ -62,7 +70,13 @@ export default function LinksDetails({ params }) {
                         <span>{urlData.createdAt}</span>
                     </span>
                 </div>
+
                 <MapChart data={urlData.mapChartData} id={"noen"} />
+                <div className="grid grid-cols-1 xl:grid-cols-2">
+                    <div className="dark:bg-zinc-900 rounded-sm  aspect-square p-2 relative">
+                        <DoughnutChart data={data} />
+                    </div>
+                </div>
             </div>
         </div>
     );
