@@ -5,12 +5,12 @@ import LineChart from "@/components/LineChart";
 
 export default function App() {
     const data = {
-        title: "Most Devices Used",
+        title: "Devices",
         labels: ["Windows", "Mac", "Iphone", "Android"],
         datasets: [
             {
                 axis: "y",
-                label: "Most Devices Used",
+                label: "Devices",
                 data: [65, 59, 80, 81],
                 fill: false,
                 backgroundColor: [
@@ -39,10 +39,17 @@ export default function App() {
         labels: ["Jan", "Feb", "Mar", "Apr", "May"],
         datasets: [
             {
-                label: "Timeline",
+                label: "Youtube",
                 data: [65, 59, 80, 81, 56, 55, 40],
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
+                tension: 0.1,
+            },
+            {
+                label: "Instagram",
+                data: [9, 0, 100, 81, 56, 55, 40],
+                fill: false,
+                borderColor: "rgb(255, 99, 132)",
                 tension: 0.1,
             },
         ],
