@@ -14,6 +14,13 @@ export default function LinksDetails({ params }) {
     const urlId = params.id;
     const urlData = userData.urls[urlId];
 
+    if (!urlData)
+        return (
+            <div className="flex items-center h-full select-none text-red-600">
+                Error Finding Url
+            </div>
+        );
+
     const charts = urlData.statistics.map((stats) => {
         const data = {
             title: stats.title,
