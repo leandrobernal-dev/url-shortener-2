@@ -13,8 +13,8 @@ export default function AppLayout({ children }) {
             abcd: {
                 title: "YouTube",
                 createdAt: "Jun 11",
-                shortUrl: "http://youtube.com/",
-                longUrl: "http://localhost:3001/aTva9",
+                longUrl: "http://youtube.com/",
+                shortUrl: "http://localhost:3001/aTva9",
                 clicks: "34",
                 active: true,
                 mapChartData: [
@@ -61,8 +61,8 @@ export default function AppLayout({ children }) {
             123: {
                 title: "Instagram",
                 createdAt: "Jun 11",
-                shortUrl: "http://instagram.com/",
-                longUrl: "http://localhost:3001/bT_2a9",
+                longUrl: "http://instagram.com/",
+                shortUrl: "http://localhost:3001/bT_2a9",
                 clicks: "34",
                 active: false,
                 mapChartData: [

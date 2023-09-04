@@ -6,7 +6,6 @@ export default function Links({
     createdAt,
     clicks,
     shortUrl,
-    longUrl,
     active,
     id,
 }) {
@@ -28,7 +27,6 @@ export default function Links({
             </span>
             <span className="flex flex-col items-start text-xs ">
                 <span className="dark:text-blue-500">{shortUrl}</span>
-                <span className="dark:text-zinc-400">{longUrl}</span>
             </span>
         </button>
     );

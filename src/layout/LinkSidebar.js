@@ -10,7 +10,6 @@ export default function LinkSideBar({ data, segment }) {
                             id={urlId}
                             key={urlId}
                             createdAt={data[urlId].createdAt}
-                            longUrl={data[urlId].longUrl}
                             shortUrl={data[urlId].shortUrl}
                             title={data[urlId].title}
                             clicks={data[urlId].clicks}
