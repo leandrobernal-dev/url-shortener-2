@@ -6,16 +6,7 @@ const DoughnutChart = ({ data }) => {
         const ctx = chartRef.current.getContext("2d");
         const pieChart = new Chart(ctx, {
             type: "doughnut",
-            data: {
-                labels: data.labels,
-                datasets: [
-                    {
-                        label: data.title,
-                        data: data.values,
-                        backgroundColor: data.colors,
-                    },
-                ],
-            },
+            data,
             options: {
                 responsive: true,
                 plugins: {
