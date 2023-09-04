@@ -1,6 +1,7 @@
 "use client";
 
 import BarChartY from "@/components/BarChartY";
+import LineChart from "@/components/LineChart";
 
 export default function App() {
     const data = {
@@ -34,11 +35,26 @@ export default function App() {
             },
         ],
     };
+    const dates = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+        datasets: [
+            {
+                label: "Timeline",
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: "rgb(75, 192, 192)",
+                tension: 0.1,
+            },
+        ],
+    };
     return (
         <div className="overflow-y-scroll w-full h-full small-scrollbar pr-1 ">
             <div className="grid grid-cols-1 gap-1 lg:grid-cols-2">
                 <div className="dark:bg-zinc-900 rounded-sm relative aspect-video p-2">
                     <BarChartY data={data} />
+                </div>
+                <div className="dark:bg-zinc-900 rounded-sm relative aspect-video p-2">
+                    <LineChart data={dates} />
                 </div>
             </div>
         </div>
