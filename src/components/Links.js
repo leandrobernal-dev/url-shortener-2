@@ -1,4 +1,4 @@
-import { Visibility } from "@mui/icons-material";
+import { AdsClick } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
 export default function Links({
@@ -22,7 +22,7 @@ export default function Links({
             <span className="flex justify-between w-full">
                 <span className="text-xl">{title}</span>
                 <span className="flex items-center gap-1 text-xs">
-                    {clicks} <Visibility sx={{ fontSize: "14px" }} />
+                    {clicks} <AdsClick sx={{ fontSize: "14px" }} />
                 </span>
             </span>
             <span className="flex flex-col items-start text-xs ">
