@@ -1,5 +1,7 @@
 "use client";
 
+import DeleteUrlModal from "@/components/DeleteUrlModal";
+import EditUrlModalForm from "@/components/EditUrlModalForm";
 import NewUrlModalForm from "@/components/NewUrlModalForm";
 import UserDataContextProvider from "@/context/ContextProvider";
 import NavBar from "@/layout/NavBar";
@@ -158,6 +160,8 @@ export default function AppLayout({ children }) {
                 open={isNewUrlModalFormOpen}
                 setOpen={setIsNewUrlModalFormOpen}
             />
+            <EditUrlModalForm />
+            <DeleteUrlModal />
         </UserDataContextProvider>
     );
 }
