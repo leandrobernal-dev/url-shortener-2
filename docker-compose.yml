@@ -6,5 +6,6 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     image: urlshortener
+    restart: unless-stopped
     ports:
       - '3003:3000'
