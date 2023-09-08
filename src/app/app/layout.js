@@ -111,14 +111,14 @@ export default function AppLayout({ children }) {
         },
     });
 
-    const [isSideBarOpen, setIsSideBarOpen] = useState(
-        window.innerWidth > 768 ? true : false
-    );
+    const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
     const [isNewUrlModalFormOpen, setIsNewUrlModalFormOpen] = useState(false);
 
     // window resize handler
     useEffect(() => {
+        setIsSideBarOpen(window.innerWidth > 768 ? true : false);
+
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);
