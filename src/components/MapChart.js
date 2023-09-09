@@ -4,7 +4,7 @@ import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 
-function MapChart({ data, id }) {
+function MapChart({ data }) {
     const noDataColor = "000";
     const withDataColor = "#669EDA";
     useEffect(() => {
@@ -12,7 +12,7 @@ function MapChart({ data, id }) {
         am4core.useTheme(am4themes_animated);
 
         // Create the map chart instance
-        const chart = am4core.create(id, am4maps.MapChart);
+        const chart = am4core.create("mapchart", am4maps.MapChart);
         chart.geodata = am4geodata_worldLow;
 
         // Disable map interactions only when the cursor is over the map
@@ -76,7 +76,7 @@ function MapChart({ data, id }) {
 
     return (
         <div
-            id={id}
+            id="mapchart"
             className="rounded-sm dark:bg-zinc-900"
             style={{
                 width: "100%",
