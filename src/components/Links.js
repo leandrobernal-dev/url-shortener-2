@@ -12,7 +12,7 @@ export default function Links({
     const router = useRouter();
     return (
         <button
-            onClick={() => router.push(`/app/links/${id}`)}
+            onClick={() => router.push(`/app/links/${shortUrl}`)}
             className={`w-full flex flex-col rounded-md border-l
             border-b-2 p-2 shadow-md ${
                 active ? "" : "border-transparent hover:border-white/50"
@@ -26,7 +26,9 @@ export default function Links({
                 </span>
             </span>
             <span className="flex flex-col items-start text-xs ">
-                <span className="dark:text-blue-500">{shortUrl}</span>
+                <span className="dark:text-blue-500">
+                    {location.origin + "/" + shortUrl}
+                </span>
             </span>
         </button>
     );
