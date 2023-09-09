@@ -13,10 +13,6 @@ const ClickSchema = new Schema(
             type: String,
             required: false,
         },
-        ip: {
-            type: String,
-            required: false,
-        },
         os: {
             type: String,
             required: false,
