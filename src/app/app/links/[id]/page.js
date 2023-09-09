@@ -1,11 +1,12 @@
 "use client";
 
 import DoughnutChart from "@/components/DoughnutChart";
+import LoadingSpin from "@/components/LoadingSpin";
 import MapChart from "@/components/MapChart";
 import { UserDataContext } from "@/context/ContextProvider";
 import { CalendarMonth, Close, Delete, Edit, Info } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function LinksDetails({ params }) {
     const router = useRouter();
@@ -14,21 +15,43 @@ export default function LinksDetails({ params }) {
     const urlId = params.id;
     const urlData = userData.urls[urlId];
 
-    if (!urlData)
+    const [urlDetails, setUrlDetails] = useState({});
+    const [stats, setStats] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    // fetch url info
+    useEffect(() => {
+        fetch(`/api/urls/?id=${urlId}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setUrlDetails(data.data);
+                console.log(data);
+                setStats(data.statistics);
+                setIsLoading(false);
+            });
+        // setUrlData({title: "YouTube",
+        // createdAt: "Jun 11",
+        // longUrl: "http://youtube.com/",
+        // shortUrl: "http://localhost:3001/aTva9",
+        // clicks: "34",
+        // active: true,})
+    }, []);
+
+    if (!urlDetails)
         return (
             <div className="flex items-center h-full select-none text-red-600">
                 Error Finding Url
             </div>
         );
 
-    const charts = urlData.statistics.map((stats) => {
+    const charts = stats.map((stat) => {
         const data = {
-            title: stats.title,
-            labels: stats.data.map((label) => label.id),
+            title: stat.title,
+            labels: stat.data.map((label) => label._id),
             datasets: [
                 {
-                    label: stats.title,
-                    data: stats.data.map((label) => label.count),
+                    label: stat.title,
+                    data: stat.data.map((label) => label.count),
                     fill: false,
                     backgroundColor: [
                         "rgba(255, 99, 132, 0.2)",
@@ -74,49 +97,69 @@ export default function LinksDetails({ params }) {
                 </div>
             </nav>
 
-            <div className="flex flex-col gap-1 overflow-y-scroll h-full small-scrollbar pr-1 w-full">
-                <div className="w-full py-2 px-4 dark:bg-zinc-900 rounded-sm">
-                    <div className="flex justify-between">
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-xl font-bold">
-                                {userData.urls[urlId].title}
-                            </h1>
-                            <span className="text-xs flex flex-col gap-1">
-                                <p className="dark:text-blue-500">
-                                    <a href={urlData.shortUrl}>
-                                        {urlData.shortUrl}
-                                    </a>
-                                </p>
-                                <p className="dark:text-zinc-400">
-                                    <a href={urlData.longUrl}>
-                                        {urlData.longUrl}
-                                    </a>
-                                </p>
+            {isLoading ? (
+                <LoadingSpin />
+            ) : (
+                <div className="flex flex-col gap-1 overflow-y-scroll h-full small-scrollbar pr-1 w-full">
+                    <div className="w-full py-2 px-4 dark:bg-zinc-900 rounded-sm">
+                        <div className="flex justify-between">
+                            <div className="flex flex-col gap-2">
+                                <h1 className="text-xl font-bold">
+                                    {urlDetails.name}
+                                </h1>
+                                <span className="text-xs flex flex-col gap-1">
+                                    <p className="dark:text-blue-500">
+                                        <a
+                                            href={
+                                                location.origin +
+                                                "/" +
+                                                urlDetails.shortenedUrl
+                                            }
+                                        >
+                                            {location.origin +
+                                                "/" +
+                                                urlDetails.shortenedUrl}
+                                        </a>
+                                    </p>
+                                    <p className="dark:text-zinc-400">
+                                        <a href={urlDetails.url}>
+                                            {urlDetails.url}
+                                        </a>
+                                    </p>
+                                </span>
+                            </div>
+                            <div className="flex gap-2">
+                                <button className="h-9 dark:bg-zinc-600 text-sm gap-1 dark:hover:bg-zinc-500 p-2 flex items-center rounded-sm">
+                                    <Edit fontSize="small" />
+                                    <span>Edit</span>
+                                </button>
+                                <button className="h-9 dark:bg-zinc-600 text-sm gap-1 dark:hover:bg-zinc-500 p-2 flex items-center rounded-sm">
+                                    <Delete fontSize="small" />
+                                    <span>Delete</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <span className="text-xs dark:text-zinc-400 flex items-center gap-1 p-1">
+                            <CalendarMonth fontSize="small" />
+                            <span>
+                                {new Date(
+                                    urlDetails.createdAt
+                                ).toLocaleDateString("en-US", {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                })}
                             </span>
-                        </div>
-                        <div className="flex gap-2">
-                            <button className="h-9 dark:bg-zinc-600 text-sm gap-1 dark:hover:bg-zinc-500 p-2 flex items-center rounded-sm">
-                                <Edit fontSize="small" />
-                                <span>Edit</span>
-                            </button>
-                            <button className="h-9 dark:bg-zinc-600 text-sm gap-1 dark:hover:bg-zinc-500 p-2 flex items-center rounded-sm">
-                                <Delete fontSize="small" />
-                                <span>Delete</span>
-                            </button>
-                        </div>
+                        </span>
                     </div>
 
-                    <span className="text-xs dark:text-zinc-400 flex items-center gap-1 p-1">
-                        <CalendarMonth fontSize="small" />
-                        <span>{urlData.createdAt}</span>
-                    </span>
+                    {/* <MapChart data={urlData.mapChartData} id={"noen"} /> */}
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-1">
+                        {charts}
+                    </div>
                 </div>
-
-                <MapChart data={urlData.mapChartData} id={"noen"} />
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-1">
-                    {charts}
-                </div>
-            </div>
+            )}
         </div>
     );
 }
