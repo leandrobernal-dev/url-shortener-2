@@ -11,10 +11,25 @@ export const GET = async (request) => {
     // if GET request has 'id' parameter, return single url data
     if (searchParams.get("id")) {
         const id = searchParams.get("id").toString().trim();
-        const data = await Url.findOne({ shortenedUrl: id }).populate(
-            "detailedClicks"
-        );
+        const data = await Url.findOne({ shortenedUrl: id }).populate("clicks");
         const currentYear = new Date().getFullYear();
+        const clickPeriod = await Clicks.aggregate([
+            {
+                $match: {
+                    url: data._id,
+                    createdAt: {
+                        $gte: new Date(currentYear, 0, 1), // Start of the year
+                        $lt: new Date(currentYear + 1, 0, 1), // Start of the next year
+                    },
+                },
+            },
+            {
+                $group: {
+                    _id: { $month: "$createdAt" },
+                    count: { $sum: 1 },
+                },
+            },
+        ]);
         const device = await Clicks.aggregate([
             { $match: { url: data._id } },
             {
@@ -24,8 +39,46 @@ export const GET = async (request) => {
                 },
             },
         ]);
-
-        const statistics = [{ title: "Operating System", data: device }];
+        const os = await Clicks.aggregate([
+            { $match: { url: data._id } },
+            {
+                $group: {
+                    _id: "$os",
+                    count: { $sum: 1 },
+                },
+            },
+        ]);
+        const location = await Clicks.aggregate([
+            { $match: { url: data._id } },
+            {
+                $group: {
+                    _id: "$location",
+                    count: { $sum: 1 },
+                },
+            },
+            {
+                $project: {
+                    id: "$_id",
+                    count: "$count",
+                },
+            },
+        ]);
+        console.log(location);
+        const referrer = await Clicks.aggregate([
+            { $match: { url: data._id } },
+            {
+                $group: {
+                    _id: "$referrer",
+                    count: { $sum: 1 },
+                },
+            },
+        ]);
+        const statistics = [
+            { title: "Device", data: device },
+            { title: "Operating System", data: os },
+            { title: "Top Locations", data: [...location] },
+            { title: "Top Referrer", data: referrer },
+        ];
 
         return NextResponse.json({ data, statistics });
     }
