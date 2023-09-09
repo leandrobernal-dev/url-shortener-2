@@ -2,8 +2,10 @@ import { NextResponse } from "next/server";
 
 import Url from "@/models/Url";
 import Clicks from "@/models/Clicks";
+import dbConnect from "@/mongodb/mongodb";
 
 export const GET = async (request) => {
+    await dbConnect();
     // check user auth here
 
     const { searchParams } = new URL(request.url);
