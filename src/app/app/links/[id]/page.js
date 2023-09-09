@@ -37,7 +37,7 @@ export default function LinksDetails({ params }) {
             </div>
         );
 
-    const charts = stats.map((stat) => {
+    const charts = stats.map((stat, index) => {
         const data = {
             title: stat.title,
             labels: stat.data.map((label) => label._id),
@@ -70,7 +70,7 @@ export default function LinksDetails({ params }) {
         };
         return (
             <div
-                key={data.labels}
+                key={data.labels + index}
                 className="dark:bg-zinc-900 rounded-sm  aspect-square p-2 relative"
             >
                 <DoughnutChart data={data} />
