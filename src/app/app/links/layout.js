@@ -3,13 +3,24 @@
 import { UserDataContext } from "@/context/ContextProvider";
 import LinkSideBar from "@/layout/LinkSidebar";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function LinksLayout({ children }) {
     const { userData } = useContext(UserDataContext);
-    const data = userData.urls;
+    // const data = userData.urls;
+    const [data, setData] = useState([]);
 
     const segment = useSelectedLayoutSegment();
+
+    // fetch user-data here
+    useEffect(() => {
+        fetch("/api/urls")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setData(data.urls);
+            });
+    }, []);
 
     return (
         <div className="flex gap-1 h-full">
