@@ -12,6 +12,13 @@ export const GET = async (request) => {
     if (searchParams.get("id")) {
         const id = searchParams.get("id").toString().trim();
         const data = await Url.findOne({ shortenedUrl: id }).populate("clicks");
+
+        if (!data.clicks) {
+            return NextResponse.json(
+                { msg: "Not Enough Data", data },
+                { status: 404 }
+            );
+        }
         const currentYear = new Date().getFullYear();
         const clickPeriod = await Clicks.aggregate([
             {
@@ -80,7 +87,7 @@ export const GET = async (request) => {
             { title: "Top Referrer", data: referrer },
         ];
 
-        return NextResponse.json({ data, statistics });
+        return NextResponse.json({ data, statistics }, { status: 200 });
     }
 
     const urls = await Url.find().populate("clicks");

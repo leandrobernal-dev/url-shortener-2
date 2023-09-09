@@ -17,66 +17,27 @@ export default function LinksDetails({ params }) {
     const [mapChartData, setMapChartData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const [urlStatus, setUrlStatus] = useState(true);
+
     // fetch url info
     useEffect(() => {
         fetch(`/api/urls/?id=${urlId}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) setUrlStatus(false);
+                return res.json();
+            })
             .then((data) => {
                 setUrlDetails(data.data);
                 console.log(data);
                 setStats(data.statistics);
                 setMapChartData(data.statistics[2].data);
                 setIsLoading(false);
+            })
+            .catch((e) => {
+                setIsLoading(false);
             });
     }, []);
 
-    if (!urlDetails)
-        return (
-            <div className="flex items-center h-full select-none text-red-600">
-                Error Finding Url
-            </div>
-        );
-
-    const charts = stats.map((stat, index) => {
-        const data = {
-            title: stat.title,
-            labels: stat.data.map((label) => label._id),
-            datasets: [
-                {
-                    label: stat.title,
-                    data: stat.data.map((label) => label.count),
-                    fill: false,
-                    backgroundColor: [
-                        "rgba(255, 99, 132, 0.2)",
-                        "rgba(255, 159, 64, 0.2)",
-                        "rgba(255, 205, 86, 0.2)",
-                        "rgba(75, 192, 192, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                        "rgba(153, 102, 255, 0.2)",
-                        "rgba(201, 203, 207, 0.2)",
-                    ],
-                    borderColor: [
-                        "rgb(255, 99, 132)",
-                        "rgb(255, 159, 64)",
-                        "rgb(255, 205, 86)",
-                        "rgb(75, 192, 192)",
-                        "rgb(54, 162, 235)",
-                        "rgb(153, 102, 255)",
-                        "rgb(201, 203, 207)",
-                    ],
-                    borderWidth: 1,
-                },
-            ],
-        };
-        return (
-            <div
-                key={data.labels + index}
-                className="dark:bg-zinc-900 rounded-sm  aspect-square p-2 relative"
-            >
-                <DoughnutChart data={data} />
-            </div>
-        );
-    });
     return (
         <div className="fixed top-1 right-1 left-1 w-full bottom-1  h-full dark:bg-black sm:static pt-[60px] sm:pt-0">
             <nav className="fixed flex z-50 items-center top-1 h-14 left-1 right-1 dark:bg-zinc-800 sm:hidden">
@@ -92,6 +53,10 @@ export default function LinksDetails({ params }) {
 
             {isLoading ? (
                 <LoadingSpin />
+            ) : !urlDetails && urlStatus ? (
+                <div className="flex w-full h-full justify-center items-center select-none text-red-600">
+                    Error Finding Url
+                </div>
             ) : (
                 <div className="flex flex-col gap-1 overflow-y-scroll h-full small-scrollbar pr-1 w-full">
                     <div className="w-full py-2 px-4 dark:bg-zinc-900 rounded-sm">
@@ -147,10 +112,61 @@ export default function LinksDetails({ params }) {
                         </span>
                     </div>
 
-                    <MapChart data={mapChartData} />
-                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-1">
-                        {charts}
-                    </div>
+                    {urlStatus === false ? (
+                        <div className="flex w-full h-full justify-center items-center select-none dark:text-white">
+                            Not Enough Data For this URL
+                        </div>
+                    ) : (
+                        <>
+                            <MapChart data={mapChartData} />
+                            <div className="grid grid-cols-1 xl:grid-cols-2 gap-1">
+                                {stats.map((stat, index) => {
+                                    const data = {
+                                        title: stat.title,
+                                        labels: stat.data.map(
+                                            (label) => label._id
+                                        ),
+                                        datasets: [
+                                            {
+                                                label: stat.title,
+                                                data: stat.data.map(
+                                                    (label) => label.count
+                                                ),
+                                                fill: false,
+                                                backgroundColor: [
+                                                    "rgba(255, 99, 132, 0.2)",
+                                                    "rgba(255, 159, 64, 0.2)",
+                                                    "rgba(255, 205, 86, 0.2)",
+                                                    "rgba(75, 192, 192, 0.2)",
+                                                    "rgba(54, 162, 235, 0.2)",
+                                                    "rgba(153, 102, 255, 0.2)",
+                                                    "rgba(201, 203, 207, 0.2)",
+                                                ],
+                                                borderColor: [
+                                                    "rgb(255, 99, 132)",
+                                                    "rgb(255, 159, 64)",
+                                                    "rgb(255, 205, 86)",
+                                                    "rgb(75, 192, 192)",
+                                                    "rgb(54, 162, 235)",
+                                                    "rgb(153, 102, 255)",
+                                                    "rgb(201, 203, 207)",
+                                                ],
+                                                borderWidth: 1,
+                                            },
+                                        ],
+                                    };
+                                    return (
+                                        <div
+                                            key={data.labels + index}
+                                            className="dark:bg-zinc-900 rounded-sm  aspect-square p-2 relative"
+                                        >
+                                            <DoughnutChart data={data} />
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    )}
                 </div>
             )}
         </div>
