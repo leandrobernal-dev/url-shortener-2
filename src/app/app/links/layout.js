@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function LinksLayout({ children }) {
     // const data = userData.urls;
     const [data, setData] = useState([]);
-
+    const [isLoadingData, setIsLoadingData] = useState(true);
     const segment = useSelectedLayoutSegment();
 
     // fetch user-data here
@@ -16,13 +16,18 @@ export default function LinksLayout({ children }) {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
+                setIsLoadingData(false);
                 setData(data.urls);
             });
     }, []);
 
     return (
         <div className="flex gap-1 h-full">
-            <LinkSideBar data={data} segment={segment} />
+            <LinkSideBar
+                data={data}
+                segment={segment}
+                isLoading={isLoadingData}
+            />
 
             <div
                 className={`rounded-sm  sm:flex  justify-center flex-1 ${
