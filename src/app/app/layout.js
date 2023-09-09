@@ -10,107 +10,6 @@ import { Close, Menu } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 
 export default function AppLayout({ children }) {
-    const [userData, setUserData] = useState({
-        urls: {
-            abcd: {
-                title: "YouTube",
-                createdAt: "Jun 11",
-                longUrl: "http://youtube.com/",
-                shortUrl: "http://localhost:3001/aTva9",
-                clicks: "34",
-                active: true,
-                mapChartData: [
-                    { id: "US", count: 21 },
-                    { id: "JP", count: 451 },
-                ],
-                statistics: [
-                    {
-                        title: "Operating System",
-                        data: [
-                            { id: "Windows", count: 2 },
-                            { id: "MacOS", count: 2 },
-                            { id: "Iphone", count: 2 },
-                            { id: "Android", count: 2 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                    {
-                        title: "Device",
-                        data: [
-                            { id: "Desktop", count: 2 },
-                            { id: "Mobile", count: 2 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                    {
-                        title: "Location",
-                        data: [
-                            { id: "US", count: 21 },
-                            { id: "JP", count: 21 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                    {
-                        title: "Referrer",
-                        data: [
-                            { id: "YouTube", count: 21 },
-                            { id: "Facebook", count: 21 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                ],
-            },
-            123: {
-                title: "Instagram",
-                createdAt: "Jun 11",
-                longUrl: "http://instagram.com/",
-                shortUrl: "http://localhost:3001/bT_2a9",
-                clicks: "34",
-                active: false,
-                mapChartData: [
-                    { id: "US", count: 21 },
-                    { id: "JP", count: 451 },
-                ],
-                statistics: [
-                    {
-                        title: "Operating System",
-                        data: [
-                            { id: "Windows", count: 2 },
-                            { id: "MacOS", count: 2 },
-                            { id: "Iphone", count: 2 },
-                            { id: "Android", count: 2 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                    {
-                        title: "Device",
-                        data: [
-                            { id: "Desktop", count: 2 },
-                            { id: "Mobile", count: 2 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                    {
-                        title: "Location",
-                        data: [
-                            { id: "US", count: 21 },
-                            { id: "JP", count: 21 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                    {
-                        title: "Referrer",
-                        data: [
-                            { id: "YouTube", count: 21 },
-                            { id: "Facebook", count: 21 },
-                            { id: "Unknown", count: 2 },
-                        ],
-                    },
-                ],
-            },
-        },
-    });
-
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
     const [isNewUrlModalFormOpen, setIsNewUrlModalFormOpen] = useState(false);
@@ -142,7 +41,6 @@ export default function AppLayout({ children }) {
             value={{
                 isSideBarOpen,
                 setIsSideBarOpen,
-                userData,
             }}
         >
             <main className="">

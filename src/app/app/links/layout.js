@@ -1,12 +1,10 @@
 "use client";
 
-import { UserDataContext } from "@/context/ContextProvider";
 import LinkSideBar from "@/layout/LinkSidebar";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LinksLayout({ children }) {
-    const { userData } = useContext(UserDataContext);
     // const data = userData.urls;
     const [data, setData] = useState([]);
 

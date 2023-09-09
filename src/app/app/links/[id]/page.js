@@ -3,7 +3,6 @@
 import DoughnutChart from "@/components/DoughnutChart";
 import LoadingSpin from "@/components/LoadingSpin";
 import MapChart from "@/components/MapChart";
-import { UserDataContext } from "@/context/ContextProvider";
 import { CalendarMonth, Close, Delete, Edit, Info } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
@@ -11,12 +10,11 @@ import { useContext, useEffect, useState } from "react";
 export default function LinksDetails({ params }) {
     const router = useRouter();
 
-    const { userData } = useContext(UserDataContext);
     const urlId = params.id;
-    const urlData = userData.urls[urlId];
 
     const [urlDetails, setUrlDetails] = useState({});
     const [stats, setStats] = useState([]);
+    const [mapChartData, setMapChartData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     // fetch url info
@@ -27,14 +25,9 @@ export default function LinksDetails({ params }) {
                 setUrlDetails(data.data);
                 console.log(data);
                 setStats(data.statistics);
+                setMapChartData(data.statistics[2].data);
                 setIsLoading(false);
             });
-        // setUrlData({title: "YouTube",
-        // createdAt: "Jun 11",
-        // longUrl: "http://youtube.com/",
-        // shortUrl: "http://localhost:3001/aTva9",
-        // clicks: "34",
-        // active: true,})
     }, []);
 
     if (!urlDetails)
@@ -154,7 +147,7 @@ export default function LinksDetails({ params }) {
                         </span>
                     </div>
 
-                    {/* <MapChart data={urlData.mapChartData} id={"noen"} /> */}
+                    <MapChart data={mapChartData} />
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-1">
                         {charts}
                     </div>
