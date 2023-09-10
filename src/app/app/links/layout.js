@@ -34,7 +34,9 @@ export default function LinksLayout({ children }) {
                     segment ? "items-start" : "hidden items-center"
                 }`}
             >
-                {children}
+                <div className="fixed top-1 right-1 left-1 w-full bottom-1  h-full dark:bg-black sm:static pt-[60px] sm:pt-0">
+                    {children}
+                </div>
             </div>
         </div>
     );

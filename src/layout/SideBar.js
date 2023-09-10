@@ -3,7 +3,7 @@ import { Add, Apps, LinkRounded, QrCode } from "@mui/icons-material";
 import { useContext, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
+export default function SideBar({ SideBarToggle }) {
     const { isSideBarOpen, setIsSideBarOpen } = useContext(UserDataContext);
 
     const pathname = usePathname();
@@ -72,9 +72,7 @@ export default function SideBar({ SideBarToggle, openNewUrlModalForm }) {
             <div className="flex flex-col">
                 <div>
                     <button
-                        onClick={() =>
-                            openNewUrlModalForm((prevState) => !prevState)
-                        }
+                        onClick={() => router.push("/app/links/create")}
                         className="w-full rounded-sm dark:bg-zinc-600 p-2 dark:hover:bg-zinc-500"
                     >
                         <Add /> {isSideBarOpen ? "Create new" : ""}

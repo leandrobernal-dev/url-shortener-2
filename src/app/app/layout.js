@@ -12,8 +12,6 @@ import { useEffect, useState } from "react";
 export default function AppLayout({ children }) {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
-    const [isNewUrlModalFormOpen, setIsNewUrlModalFormOpen] = useState(false);
-
     // window resize handler
     useEffect(() => {
         setIsSideBarOpen(window.innerWidth > 768 ? true : false);
@@ -45,19 +43,12 @@ export default function AppLayout({ children }) {
         >
             <main className="">
                 <NavBar SideBarToggle={SideBarToggle} />
-                <SideBar
-                    SideBarToggle={SideBarToggle}
-                    openNewUrlModalForm={setIsNewUrlModalFormOpen}
-                />
+                <SideBar SideBarToggle={SideBarToggle} />
 
                 <div className="fixed sm:top-1 top-[64px] md:left-[232px] sm:left-16 rounded-sm bottom-1 left-1 right-1">
                     {children}
                 </div>
             </main>
-            <NewUrlModalForm
-                open={isNewUrlModalFormOpen}
-                setOpen={setIsNewUrlModalFormOpen}
-            />
             <EditUrlModalForm />
             <DeleteUrlModal />
         </UserDataContextProvider>
