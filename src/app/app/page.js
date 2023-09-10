@@ -1,7 +1,7 @@
 "use client";
 
-import BarChartY from "@/components/BarChartY";
-import LineChart from "@/components/LineChart";
+import BarChartY from "@/components/charts/BarChartY";
+import LineChart from "@/components/charts/LineChart";
 
 export default function App() {
     const osData = {

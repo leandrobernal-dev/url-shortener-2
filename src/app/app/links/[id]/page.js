@@ -1,8 +1,8 @@
 "use client";
 
-import DoughnutChart from "@/components/DoughnutChart";
+import DoughnutChart from "@/components/charts/DoughnutChart";
 import LoadingSpin from "@/components/LoadingSpin";
-import MapChart from "@/components/MapChart";
+import MapChart from "@/components/charts/MapChart";
 import { CalendarMonth, Close, Delete, Edit, Info } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
