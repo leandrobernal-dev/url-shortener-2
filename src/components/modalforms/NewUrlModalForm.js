@@ -1,4 +1,5 @@
 import { Add, Close } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 import { useState } from "react";
 
 export default function NewUrlModalForm({ open, setOpen }) {
@@ -9,7 +10,35 @@ export default function NewUrlModalForm({ open, setOpen }) {
     const [formErrors, setFormErrors] = useState({});
 
     function handleNewUrlSubmit() {}
-    function handleUrlInputChange() {}
+
+    function isValidURL(url) {
+        const urlPattern =
+            /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/[^\s]*)*#?(:~:text=[^\s]*)*$/i;
+        return urlPattern.test(url);
+    }
+    function handleUrlInputChange(e) {
+        const urlInput = e.target.value;
+        const validUrl = isValidURL(urlInput);
+        if (validUrl) {
+            setIsLoadingPageTitle(true);
+            fetch("/api/geturltitle?url=" + urlInput)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        setIsLoadingPageTitle(false);
+                    }
+                })
+                .then((data) => {
+                    setIsLoadingPageTitle(false);
+                    setUrlTitle(data.title);
+                })
+                .catch((e) => {
+                    setIsLoadingPageTitle(false);
+                    console.log("Error: ", e);
+                });
+        }
+    }
     return (
         <>
             {open ? (
