@@ -1,8 +1,8 @@
 "use client";
 
-import DeleteUrlModal from "@/components/DeleteUrlModal";
-import EditUrlModalForm from "@/components/EditUrlModalForm";
-import NewUrlModalForm from "@/components/NewUrlModalForm";
+import DeleteUrlModal from "@/components/modalforms/DeleteUrlModal";
+import EditUrlModalForm from "@/components/modalforms/EditUrlModalForm";
+import NewUrlModalForm from "@/components/modalforms/NewUrlModalForm";
 import UserDataContextProvider from "@/context/ContextProvider";
 import NavBar from "@/layout/NavBar";
 import SideBar from "@/layout/SideBar";
