@@ -11,25 +11,35 @@ export default function LinkSideBar({ data, segment, isLoading }) {
                     </div>
                 ) : (
                     <>
-                        {data.map((url) => {
-                            return (
-                                <Links
-                                    key={url.id}
-                                    id={url.id}
-                                    createdAt={new Date(
-                                        url.createdAt
-                                    ).toLocaleDateString("en-US", {
-                                        month: "short",
-                                        day: "numeric",
-                                        year: "numeric",
-                                    })}
-                                    shortUrl={url.shortenedUrl}
-                                    title={url.name}
-                                    clicks={url.clicks}
-                                    active={segment === url.shortenedUrl}
-                                />
-                            );
-                        })}
+                        {data.length === 0 ? (
+                            <div className="dark:text-zinc-300 text-sm w-full text-center p-4">
+                                You have no URLs created yet
+                            </div>
+                        ) : (
+                            <>
+                                {data.map((url) => {
+                                    return (
+                                        <Links
+                                            key={url.id}
+                                            id={url.id}
+                                            createdAt={new Date(
+                                                url.createdAt
+                                            ).toLocaleDateString("en-US", {
+                                                month: "short",
+                                                day: "numeric",
+                                                year: "numeric",
+                                            })}
+                                            shortUrl={url.shortenedUrl}
+                                            title={url.name}
+                                            clicks={url.clicks}
+                                            active={
+                                                segment === url.shortenedUrl
+                                            }
+                                        />
+                                    );
+                                })}
+                            </>
+                        )}
                     </>
                 )}
             </div>
