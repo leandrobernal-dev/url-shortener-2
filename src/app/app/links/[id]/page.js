@@ -4,11 +4,12 @@ import DoughnutChart from "@/components/charts/DoughnutChart";
 import LoadingSpin from "@/components/LoadingSpin";
 import MapChart from "@/components/charts/MapChart";
 import { CalendarMonth, Close, Delete, Edit, Info } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 export default function LinksDetails({ params }) {
     const router = useRouter();
+    const pathname = usePathname();
 
     const urlId = params.id;
 
@@ -87,7 +88,12 @@ export default function LinksDetails({ params }) {
                                 </span>
                             </div>
                             <div className="flex gap-2">
-                                <button className="h-9 dark:bg-zinc-600 text-sm gap-1 dark:hover:bg-zinc-500 p-2 flex items-center rounded-sm">
+                                <button
+                                    onClick={() =>
+                                        router.push(pathname + "/edit")
+                                    }
+                                    className="h-9 dark:bg-zinc-600 text-sm gap-1 dark:hover:bg-zinc-500 p-2 flex items-center rounded-sm"
+                                >
                                     <Edit fontSize="small" />
                                     <span>Edit</span>
                                 </button>
