@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 export default function AppLayout({ children }) {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
+    const [activeUrl, setActiveUrl] = useState({});
+
     // window resize handler
     useEffect(() => {
         setIsSideBarOpen(window.innerWidth > 768 ? true : false);
@@ -39,6 +41,8 @@ export default function AppLayout({ children }) {
             value={{
                 isSideBarOpen,
                 setIsSideBarOpen,
+                activeUrl,
+                setActiveUrl,
             }}
         >
             <main className="">
