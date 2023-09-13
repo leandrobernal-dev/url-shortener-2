@@ -8,7 +8,57 @@ export default function AddEditUrl({ type }) {
 
     const [formErrors, setFormErrors] = useState({});
 
-    function handleNewUrlSubmit() {}
+    function handleUrlSubmit(e) {
+        e.preventDefault();
+        setFormErrors({});
+        setIsSubmitting(true);
+        const validationError = {};
+
+        const {
+            name: { value: name },
+            url: { value: url },
+            customBackHalf: { value: customBackHalf },
+            generateQR: { checked: generateQR },
+        } = e.currentTarget.elements;
+        console.log(name, url, customBackHalf, generateQR);
+
+        fetch("/api/urls", {
+            method: type === "create" ? "POST" : "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name,
+                url,
+                customBackHalf,
+                generateQR,
+            }),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    if (response.status === 403) {
+                        console.log(response);
+                        setIsSubmitting(false);
+                        setFormErrors({
+                            customBackHalf: "Oops! Back-half already exist",
+                        });
+                    }
+                }
+            })
+            .then((data) => {
+                console.log(data.newUrl);
+                setIsSubmitting(false);
+                setData((prevState) => {
+                    const updatedData = [...prevState];
+                    updatedData.push(data.newUrl);
+                    return updatedData;
+                });
+                setOpen();
+            })
+            .catch((error) => console.log(error));
+    }
 
     function isValidURL(url) {
         const urlPattern =
@@ -41,7 +91,7 @@ export default function AddEditUrl({ type }) {
     return (
         <div className="flex justify-center w-full items-center h-full">
             <form
-                onSubmit={handleNewUrlSubmit}
+                onSubmit={handleUrlSubmit}
                 className="w-11/12 max-w-lg p-4 dark:text-white"
             >
                 <div className="flex w-full items-center justify-between">
